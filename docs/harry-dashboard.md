@@ -127,7 +127,7 @@ var teams = {
   };
 const data_harry =(async () =>{ fetch('./_file/data/harryshots.json')
  .then(response => response.json())
- .then(data_jamal => {
+ .then(data_harry => {
  console.log(data_harry);
 // aquí puedes trabajar con los datos JSON
  const layer = chartCard.select("#above")
