@@ -14,14 +14,14 @@ async def main():
         understat = Understat(session)
         #player = await understat.get_player_grouped_stats(8418)
         #shots = await understat.get_player_shots(8418, {'season': "2022", 'player_assisted': 'Alphonso Davies'})
-        shots = await understat.get_player_shots(8418, {'season': "2023"})
+        shots = await understat.get_player_shots(647, {'season': "2023"})
         #print(json.dumps(player))
-        jamal_string=json.dumps(shots, indent=4, ensure_ascii=False)
+        harry_string=json.dumps(shots, indent=4, ensure_ascii=False)
         ##print(shots)
         json.dump(shots, sys.stdout, indent=4, ensure_ascii=False)
         #pd.DataFrame.from_dict(player)
-        with codecs.open("./jamalshots.json", "w", "utf-8") as jsonfile:
-            jsonfile.write(jamal_string)
+        with codecs.open("./harryshots.json", "w", "utf-8") as jsonfile:
+            jsonfile.write(harry_string)
         jsonfile.close()
         
     
@@ -29,7 +29,7 @@ nest_asyncio.apply()
 loop = asyncio.get_event_loop()
 loop.run_until_complete(main())
 
-df=pd.read_json('./jamalshots.json')
+df=pd.read_json('./harryshots.json')
 
 df_result_grouped=df.groupby(['result']).count().sort_values(by=['id'], ascending=False)['id']
 df_result_grouped.to_csv('result.csv', encoding='iso-8859-1')
