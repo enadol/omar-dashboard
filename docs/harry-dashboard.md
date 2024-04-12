@@ -125,7 +125,7 @@ var teams = {
   'Bayern Munich': { color: 'crimson', side: 'home'},
   Opponent: { color: 'gold', side: 'away' }
   };
-const data_harry =(async () =>{ fetch('./_file/data/harryshots.json')
+const data_harry =(async () =>{ fetch('harryshots.json')
  .then(response => response.json())
  .then(data_harry => {
  console.log(data_harry);

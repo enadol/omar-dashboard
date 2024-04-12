@@ -32,19 +32,19 @@ loop.run_until_complete(main())
 df=pd.read_json('./harryshots.json')
 
 df_result_grouped=df.groupby(['result']).count().sort_values(by=['id'], ascending=False)['id']
-df_result_grouped.to_csv('result.csv', encoding='iso-8859-1')
+df_result_grouped.to_csv('./docs/result.csv', encoding='iso-8859-1')
 
 df_assisted_grouped=df.groupby(['player_assisted']).count().sort_values(by=['id'], ascending=False)['id']
-df_assisted_grouped.to_csv('assisted.csv', encoding='iso-8859-1')
+df_assisted_grouped.to_csv('./docs/assisted.csv', encoding='iso-8859-1')
 
 df_type_grouped=df.groupby(['shotType']).count().sort_values(by=['id'], ascending=False)['id']
-df_type_grouped.to_csv('type.csv', encoding='iso-8859-1')
+df_type_grouped.to_csv('./docs/type.csv', encoding='iso-8859-1')
 
 df_situation_grouped=df.groupby(['situation']).count().sort_values(by=['id'], ascending=False)['id']
-df_situation_grouped.to_csv('situation.csv', encoding='iso-8859-1')
+df_situation_grouped.to_csv('./docs/situation.csv', encoding='iso-8859-1')
 
 df_action_grouped=df.groupby(['lastAction']).count().sort_values(by=['id'], ascending=False)['id']
-df_action_grouped.to_csv('action.csv', encoding='iso-8859-1')
+df_action_grouped.to_csv('./docs/action.csv', encoding='iso-8859-1')
 
 df_minute_grouped=df.groupby(['minute']).count().sort_index(ascending=True)['id']
-df_minute_grouped.to_csv('minute.csv', encoding='iso-8859-1')
+df_minute_grouped.to_csv('./docs/minute.csv', encoding='iso-8859-1')
