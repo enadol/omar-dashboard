@@ -1,39 +1,79 @@
 ---
+theme: "dashboard"
+title: Shot Dashboard
 toc: false
+sidebar: false
+pager: false
 ---
-
 <style>
 
-.hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: var(--sans-serif);
-  margin: 4rem 0 8rem;
-  text-wrap: balance;
-  text-align: center;
+html{
+
+  font-family: "Bahnschrift", sans-serif;
 }
 
-.hero h1 {
-  margin: 2rem 0;
-  max-width: none;
-  font-size: 14vw;
-  font-weight: 900;
-  line-height: 1;
-  background: linear-gradient(30deg, var(--theme-foreground-focus), currentColor);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+h1, h2, h3 {
+  font-family: bahnschrift, sans-serif;
+
 }
 
-.hero h2 {
-  margin: 0;
-  max-width: 34em;
-  font-size: 20px;
-  font-style: initial;
-  font-weight: 500;
-  line-height: 1.5;
-  color: var(--theme-foreground-muted);
+figure h2, span{
+  font-family: bahnschrift, sans-serif;
+
+}
+
+figure h3 {
+  font-family: bahnschrift, sans-serif;
+
+}
+
+
+
+h2 b{
+  font-family: "Bahnschrift", sans-serif;
+}
+
+text, .tooltip {
+  font-family: sans-serif;
+  font-size: 10pt;
+}
+
+text, #tool-data {
+  font-family: bahnschrift, sans-serif;
+  font-size: 20pt;
+}
+
+#container {
+max-width: initial;
+}
+
+
+.dim {
+  fill-opacity: 0.3;
+}
+
+.tooltip {
+  position: absolute;
+  width: auto;
+  height: auto;
+  padding: 8px;
+  background: #ddd;
+  pointer-events: none;
+  border: 1px solid #eee;
+  border-radius: 10px;
+}
+
+.custom-theme {
+  --background-color: #4B0082;
+  --color: #43FCD5;
+  --color-meta: #f3efef ;
+  --pitch-line-color: #E0FFFF;
+  --pitch-shade-color: #cccccc;
+}
+
+g text{
+
+  font-size: 8px;
 }
 
 @media (min-width: 640px) {
@@ -42,74 +82,218 @@ toc: false
   }
 }
 
+@media only screen and (max-width: 518px) {
+  #tool-data {
+      max-width: 408px;
+  }
+  #chart_card {
+      max-width: 408px;
+  }
+
+
+}
+
+}
+
 </style>
 
-<div class="hero">
-  <h1>Hello, Observable Framework</h1>
-  <h2>Welcome to your new project! Edit&nbsp;<code style="font-size: 90%;">docs/index.md</code> to change this page.</h2>
-  <a href="https://observablehq.com/framework/getting-started" target="_blank">Get started<span style="display: inline-block; margin-left: 0.25rem;">↗︎</span></a>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script type="text/javascript" src="https://enadol.de/js/d3-soccer/dist/d3-soccer.min.js"></script>
+```js
+const data = FileAttachment("./data/goals.csv").csv({typed: true});
+//view(Inputs.table(data))
+```
+
+```js
+const goals = data.filter((d) => d.result == "Goal");
+//view(goals)
+```
+```js
+//display(await data)
+```
+
+# HARRY KANE ALL SHOTS SEASON 2023/2024
+<div id="container" class="grid grid-cols-3">
+  <div id="tool-data" class="card grid-colspan-2 custom-theme" style="background-color: rgb(137 33 242 / 90%);"><h3>SHOT DATA</h3><h2>Hover the mouse on the circles to show the data for each shot</h2></div>
+<div id="chart_card" class="card">
+<script type="text/javascript">
+const HEIGHT_HEADER = 90;
+const HEIGHT_PITCH = 300;
+const HEIGHT_FOOTER = 20;
+var h = 300;
+var teams = {
+  'Bayern Munich': { color: 'crimson', side: 'home'},
+  Opponent: { color: 'gold', side: 'away' }
+  };
+const data_harry =(async () =>{ fetch('./_file/harryshots.json')
+ .then(response => response.json())
+ .then(data_harry => {
+ console.log(data_harry);
+// aquí puedes trabajar con los datos JSON
+ const layer = chartCard.select("#above")
+    .selectAll(`circle`)
+    .data(data_harry)
+    .enter()
+    .append("circle")
+    .attr("cx", (d) => {
+      if (d.h_a === "h") {
+        return parseFloat(d.X) * 105;
+      } else {
+        return parseFloat(d.X) * 105;
+      }
+    })
+    .attr("cy", (d) => 68 - parseFloat(d.Y) * 68)
+    .attr("stroke", (d) => teams["Bayern Munich"].color)
+    .attr("stroke-width", 0.2)
+    .attr("fill", (d) =>
+      d.result === "Goal" ? teams["Opponent"].color : "gold"
+    )
+    .attr("fill-opacity", 0.5)
+    .attr("r", (d) => parseFloat(d.xG) * 5)
+    .on("mouseover", function(d) {
+      var me = d3.select(this);
+      layer.insert("text")
+        .attr("id", "label")
+        .attr("x", me.attr("cx"))
+        .attr("y", me.attr("cy"))
+        .attr("dy", parseFloat(d.xG) + 14)
+        .attr("text-anchor", "middle")
+        .text(d.result);
+      // show what we interacted with
+      d3.select("#tool-data").html("<h3>SHOT DATA</h3></br>" +"Result: " + d.result+"</br> Home Team: "+d.h_team+"</br> Away Team: "+d.a_team+"</br> Player Assisted: "+d.player_assisted+"</br> Minute: "+d.minute);
+    })
+    .on("mouseout", function(d) {
+      var me = d3.select(this);
+      layer.insert("text")
+        .attr("id", "label")
+        .attr("x", me.attr("cx"))
+        .attr("y", me.attr("cy"))
+        .attr("dy", parseFloat(d.xG) + 14)
+        .attr("text-anchor", "middle")
+        .text(d.result);
+      // show what we interacted with
+        d3.select("#tool-data").html("<h3>SHOT DATA</h3><h2>Hover the mouse on the circles to show the data for each shot</h2>")});
+   })
+   .catch(error => {
+     console.error('Error al leer el archivo JSON:', error);
+   });})();
+const pitch = d3.pitch().height(h)
+  .clip([[0,0],[105,68]])
+  .goals("line")
+  .rotate(true)
+  .showDirOfPlay(false) // Show an arrow on the plot to indicate the direction of play
+  .shadeMiddleThird(false) // Shade the middle third of the pitch
+  .pitchStrokeWidth(0.5);
+const chart = d3.create('div');
+var chartCard = d3.select("#chart_card")
+    .attr("class", "card custom-theme")
+    .style("background-color", "rgb(137 33 242 / 90%)");
+const svg = chartCard
+    .append("svg")
+    .attr("width", pitch.width())
+    .attr("height", pitch.height());
+const defs = svg.append("defs");
+  // Cut pitch in half
+defs
+  .append("clipPath")
+  .attr("id", "cut-half")
+  .append("rect")
+  .attr("x", 0)
+  .attr("y", pitch.width() / 3 - 175)
+  .attr("width", pitch.height())
+  .attr("height", pitch.width() - pitch.width() / 2 + 30);
+ svg
+    .append("g")
+    .attr("clip-path", "url(#cut-half)")
+    .attr("width", pitch.width())
+    .attr("height", pitch.height())
+    .call(pitch);
+// chartCard
+//     .append("g")
+//     .attr("transform", 'translate(0, 90)')
+//     .call(pitch);
+// var g = d3.select('#pitch')
+//   .attr("width", 70)
+//   .attr("transform", "translate(-38,0)");
+</script>
+</div>
 </div>
 
-<div class="grid grid-cols-2" style="grid-auto-rows: 504px;">
+<div class="grid grid-cols-3">
   <div class="card">${
-    resize((width) => Plot.plot({
-      title: "Your awesomeness over time 🚀",
-      subtitle: "Up and to the right!",
+    resize((width) => Plot.plot({title: "Harry Kane last actions before shots 🐧",
       width,
-      y: {grid: true, label: "Awesomeness"},
+      grid: false,
+      x: {label: "Last Action"},
+      y: {label: "Amount"},
+      color: {legend: true},
       marks: [
-        Plot.ruleY([0]),
-        Plot.lineY(aapl, {x: "Date", y: "Close", tip: true})
+        Plot.dot(action, {x: "lastAction", y: "id", r: "id", stroke: "red", fill: "lastAction"}) ,
+        Plot.tip(action, Plot.pointerX({x: "lastAction", y: "id"}))
+      ]})
+      )
+  }</div>
+  <div class="card grid-colspan-2">${
+    resize((width) => Plot.plot({
+      x: {domain: [0,3], interval: 1},
+      y: {domain: [1,91], interval: 1},
+      title: "Minute shot intensity 🐧",
+      subtitle: "Number of shots by Harry Kane per match minute (season)",
+      width,
+      x: {label: "Minute"},
+      y: {label: "Shots"},
+      color: {legend: true},
+      marks: [
+        Plot.ruleX(minutes, {x: "minute", y: "id", curve: "monotone-x", stroke: "violet"}),
+        Plot.tip(minutes, Plot.pointerX({x: "minute", y: "id"})),
+        Plot.dot(minutes, {x: "minute", y: "id", fill: "grey", r: 2}),
+        Plot.axisY({interval: 1})
       ]
     }))
   }</div>
-  <div class="card">${
-    resize((width) => Plot.plot({
-      title: "How big are penguins, anyway? 🐧",
+</div>
+
+<div class="grid grid-cols-3">
+  <div class="card grid-colspan-2">${
+    resize((width) => Plot.plot({title: "Harry Kane shot partners 🐧",
+          subtitle: "Players that assisted shots by Harry Kane",
       width,
+      marginLeft: 70,
+      marginBottom: 10,
       grid: true,
-      x: {label: "Body mass (g)"},
-      y: {label: "Flipper length (mm)"},
-      color: {legend: true},
+      x: {label: "Assists to Harry Kane: "},
+      y: {label: ""},
+      color: {legend: false},
       marks: [
-        Plot.linearRegressionY(penguins, {x: "body_mass_g", y: "flipper_length_mm", stroke: "species"}),
-        Plot.dot(penguins, {x: "body_mass_g", y: "flipper_length_mm", stroke: "species", tip: true})
+        Plot.dot(assisted, {x: "id", y: "player_assisted", r: "id", stroke: "red", fill: "player_assisted"}) ,
+        Plot.tip(assisted, Plot.pointerX({x: "id", y: "player_assisted"}))
+      ]})
+      )
+  }</div>
+  <div class="card" style="grid-auto-rows: 204px;">${
+    resize((width) => Plot.plot({
+      title: "Harry Kane shots outcome 🐧",
+      width,
+      marginBottom: 50,
+      x: {label: ""},
+      y: {label: "Shots"},
+      color: {legend: true, scheme: "pastel2", label: "Outcome Range"},
+      marks: [
+        Plot.rectY(result, {x: "result", y: "id", fill: "id", stroke: "skyblue"}),
+        Plot.tip(result, Plot.pointerX({x: "result", y: "id"}))
       ]
     }))
   }</div>
 </div>
 
 ```js
-const aapl = FileAttachment("aapl.csv").csv({typed: true});
-const penguins = FileAttachment("penguins.csv").csv({typed: true});
+const action = FileAttachment("action.csv").csv({typed: true});
+//view(Inputs.table(action))
+const minutes = FileAttachment("minute.csv").csv({typed: true});
+const assisted = FileAttachment("assisted.csv").csv({typed: true});
+const result = FileAttachment("result.csv").csv({typed: true});
 ```
 
----
-
-## Next steps
-
-Here are some ideas of things you could try…
-
-<div class="grid grid-cols-4">
-  <div class="card">
-    Chart your own data using <a href="https://observablehq.com/framework/lib/plot"><code>Plot</code></a> and <a href="https://observablehq.com/framework/javascript/files"><code>FileAttachment</code></a>. Make it responsive using <a href="https://observablehq.com/framework/javascript/display#responsive-display"><code>resize</code></a>.
-  </div>
-  <div class="card">
-    Create a <a href="https://observablehq.com/framework/routing">new page</a> by adding a Markdown file (<code>whatever.md</code>) to the <code>docs</code> folder.
-  </div>
-  <div class="card">
-    Add a drop-down menu using <a href="https://observablehq.com/framework/javascript/inputs"><code>Inputs.select</code></a> and use it to filter the data shown in a chart.
-  </div>
-  <div class="card">
-    Write a <a href="https://observablehq.com/framework/loaders">data loader</a> that queries a local database or API, generating a data snapshot on build.
-  </div>
-  <div class="card">
-    Import a <a href="https://observablehq.com/framework/javascript/imports">recommended library</a> from npm, such as <a href="https://observablehq.com/framework/lib/leaflet">Leaflet</a>, <a href="https://observablehq.com/framework/lib/dot">GraphViz</a>, <a href="https://observablehq.com/framework/lib/tex">TeX</a>, or <a href="https://observablehq.com/framework/lib/duckdb">DuckDB</a>.
-  </div>
-  <div class="card">
-    Ask for help, or share your work or ideas, on the <a href="https://talk.observablehq.com/">Observable forum</a>.
-  </div>
-  <div class="card">
-    Visit <a href="https://github.com/observablehq/framework">Framework on GitHub</a> and give us a star. Or file an issue if you’ve found a bug!
-  </div>
-</div>
+<!-- ```js
+view(Inputs.table(data));
+``` -->
