@@ -69,6 +69,7 @@ max-width: initial;
   --color-meta: #f3efef ;
   --pitch-line-color: #E0FFFF;
   --pitch-shade-color: #cccccc;
+  padding-left: 5%;
 }
 
 g text{
@@ -89,6 +90,16 @@ g text{
   #chart_card {
       max-width: 408px;
   }
+
+  .custom-theme {
+  --background-color: #4B0082;
+  --color: #43FCD5;
+  --color-meta: #f3efef ;
+  --pitch-line-color: #E0FFFF;
+  --pitch-shade-color: #cccccc;
+  padding-left: 5%;
+  -webkit-transform: scale(0.9, 0.9);
+}
 
 
 }
