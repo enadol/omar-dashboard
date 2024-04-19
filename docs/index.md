@@ -33,6 +33,10 @@ h2 b{
   font-family: "Bahnschrift", sans-serif;
 }
 
+footer{
+  height:20px;
+}
+
 text, .tooltip {
   font-family: sans-serif;
   font-size: 10pt;
@@ -64,7 +68,7 @@ max-width: initial;
 }
 
 .custom-theme {
-  --background-color: #4B0082;
+  --background-color: #2192f2e6;
   --color: #43FCD5;
   --color-meta: #f3efef ;
   --pitch-line-color: #E0FFFF;
@@ -83,7 +87,8 @@ g text{
   }
 }
 
-@media only screen and (max-width: 518px) {
+@media only screen and (max-width: 320px), only screen and (min-width: 321px) (max-device-width: 768px) {
+
   #tool-data {
       max-width: 408px;
   }
@@ -91,18 +96,20 @@ g text{
       max-width: 408px;
   }
 
-  .custom-theme {
-  --background-color: #4B0082;
+  .custom-theme g#pitch{
+  --background-color: #2192f2e6;
   --color: #43FCD5;
   --color-meta: #f3efef ;
   --pitch-line-color: #E0FFFF;
   --pitch-shade-color: #cccccc;
   padding-left: 5%;
-  -webkit-transform: scale(0.9, 0.9);
+  -webkit-transform: rotate(-90deg)scale(0.9, 0.9)translate(-105 0);
+
 }
 
 
 }
+
 
 }
 
@@ -125,7 +132,7 @@ const goals = data.filter((d) => d.result == "Goal");
 
 # HARRY KANE ALL SHOTS SEASON 2023/2024
 <div id="container" class="grid grid-cols-3">
-  <div id="tool-data" class="card grid-colspan-2 custom-theme" style="background-color: rgb(137 33 242 / 90%);"><h3>SHOT DATA</h3><h2>Hover the mouse on the circles to show the data for each shot</h2></div>
+  <div id="tool-data" class="card grid-colspan-2 custom-theme" style="background-color: rgb(33 146 242 / 90%);"><h3>SHOT DATA</h3><h2>Hover the mouse on the circles to show the data for each shot</h2></div>
 <div id="chart_card" class="card">
 <script type="text/javascript">
 const HEIGHT_HEADER = 90;
@@ -198,7 +205,7 @@ const pitch = d3.pitch().height(h)
 const chart = d3.create('div');
 var chartCard = d3.select("#chart_card")
     .attr("class", "card custom-theme")
-    .style("background-color", "rgb(137 33 242 / 90%)");
+    .style("background-color", "rgb(33 146 242 / 90%)");
 const svg = chartCard
     .append("svg")
     .attr("width", pitch.width())
