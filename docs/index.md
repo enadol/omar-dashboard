@@ -1,6 +1,6 @@
 ---
 theme: "dashboard"
-title: Shot Dashboard
+title: Harry Kane
 toc: false
 sidebar: false
 pager: false
@@ -219,7 +219,7 @@ defs
   .attr("x", 0)
   .attr("y", pitch.width() / 3 - 175)
   .attr("width", pitch.height())
-  .attr("height", pitch.width() - pitch.width() / 2 + 30);
+  .attr("height", pitch.width() - pitch.width() / 2 + 60);
  svg
     .append("g")
     .attr("clip-path", "url(#cut-half)")
