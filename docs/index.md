@@ -27,7 +27,9 @@ figure h3 {
 
 }
 
-
+p{
+  font-family: "Bahnschrift", sans-serif;
+}
 
 h2 b{
   font-family: "Bahnschrift", sans-serif;
