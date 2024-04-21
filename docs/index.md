@@ -34,6 +34,7 @@ h2 b{
 }
 
 footer{
+  font-family: "Bahnschrift", sans-serif;
   height:20px;
 }
 
@@ -315,3 +316,4 @@ const result = FileAttachment("result.csv").csv({typed: true});
 <!-- ```js
 view(Inputs.table(data));
 ``` -->
+<footer>Desarrollo: Enrique A. López Magallón - @EnriqueALopezM</footer>
