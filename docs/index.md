@@ -316,4 +316,4 @@ const result = FileAttachment("result.csv").csv({typed: true});
 <!-- ```js
 view(Inputs.table(data));
 ``` -->
-<footer>Desarrollo: Enrique A. López Magallón - @EnriqueALopezM</footer>
+Desarrollo: Enrique A Lopez Magallón - [@EnriqueALopezM](https://twitter.com/EnriqueALopezM)
