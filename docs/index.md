@@ -84,6 +84,23 @@ g text{
   font-size: 8px;
 }
 
+#assisted g[aria-label="x-axis tick label"] text{
+opacity: 0.00001;
+}
+
+#actions g[aria-label="x-axis tick label"] text{
+opacity: 0.00001;
+}
+
+#assisted g[aria-label="y-axis tick label"] text{
+opacity: 0.00001;
+}
+
+#assisted g[aria-label="y-axis tick"]{
+opacity: 0.00001;
+}
+
+
 @media (min-width: 640px) {
   .hero h1 {
     font-size: 90px;
@@ -241,10 +258,10 @@ defs
 </div>
 
 <div class="grid grid-cols-3">
-  <div class="card">${
+  <div class="card" id="actions">${
     resize((width) => Plot.plot({title: "Harry Kane last actions before shots 🐧",
       width,
-      grid: false,
+      grid: true,
       x: {label: "Last Action"},
       y: {label: "Amount"},
       color: {legend: true},
@@ -289,35 +306,35 @@ defs
       ]
     }))
   }</div>
-    <div class="card">${
+    <div class="card" id="assisted">${
     resize((width) => Plot.plot({title: "Harry Kane shot partners 🐧",
           subtitle: "Players that assisted shots by Jamal Musiala",
       width,
       marginLeft: 70,
       marginBottom: 10,
-      grid: true,
-      x: {label: "Assists to Harry Kane: "},
-      y: {label: ""},
+      grid: false,
+      x: {label: "Player Assisted: "},
+      y: {label: "Assists to Harry Kane"},
       color: {legend: false},
       marks: [
-      Plot.dot(assisted, { x: 0, y: "id", r: "id", fill: "gold", stroke: "red" }),
+      Plot.dot(assisted, { x: "player_assisted", y: "id", r: "id", fill: "gold", stroke: "red" }),
         Plot.arrow(assisted, {
-      x1: 0,
+      x1: "player_assisted",
       y1: 0,
-      x2: 0,
+      x2: "player_assisted",
       y2: "id",
       bend: true,
       stroke: "brown"
     }) ,
-        Plot.tip(assisted, Plot.pointerY({x: 0, y: "id"})),
         Plot.text(assisted, {
-      x: 0,
+      x: "player_assisted",
       y: "id",
       text: "player_assisted",
       fill: "gold",
       stroke: "red",
       dy: 15
-    })
+    }),
+      Plot.tip(assisted, Plot.pointerY({x: "player_assisted", y: "id"}))
       ]})
       )
   }</div>
