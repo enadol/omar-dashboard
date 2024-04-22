@@ -275,23 +275,7 @@ defs
 </div>
 
 <div class="grid grid-cols-3">
-  <div class="card grid-colspan-2">${
-    resize((width) => Plot.plot({title: "Harry Kane shot partners 🐧",
-          subtitle: "Players that assisted shots by Harry Kane",
-      width,
-      marginLeft: 70,
-      marginBottom: 10,
-      grid: true,
-      x: {label: "Assists to Harry Kane: "},
-      y: {label: ""},
-      color: {legend: false},
-      marks: [
-        Plot.dot(assisted, {x: "id", y: "player_assisted", r: "id", stroke: "red", fill: "player_assisted"}) ,
-        Plot.tip(assisted, Plot.pointerX({x: "id", y: "player_assisted"}))
-      ]})
-      )
-  }</div>
-  <div class="card" style="grid-auto-rows: 204px;">${
+  <div class="card grid-colspan-2" style="grid-auto-rows: 204px;">${
     resize((width) => Plot.plot({
       title: "Harry Kane shots outcome 🐧",
       width,
@@ -304,6 +288,38 @@ defs
         Plot.tip(result, Plot.pointerX({x: "result", y: "id"}))
       ]
     }))
+  }</div>
+    <div class="card">${
+    resize((width) => Plot.plot({title: "Harry Kane shot partners 🐧",
+          subtitle: "Players that assisted shots by Jamal Musiala",
+      width,
+      marginLeft: 70,
+      marginBottom: 10,
+      grid: true,
+      x: {label: "Assists to Harry Kane: "},
+      y: {label: ""},
+      color: {legend: false},
+      marks: [
+      Plot.dot(assisted, { x: 0, y: "id", r: "id", fill: "gold", stroke: "red" }),
+        Plot.arrow(assisted, {
+      x1: 0,
+      y1: 0,
+      x2: 0,
+      y2: "id",
+      bend: true,
+      stroke: "brown"
+    }) ,
+        Plot.tip(assisted, Plot.pointerY({x: 0, y: "id"})),
+        Plot.text(assisted, {
+      x: 0,
+      y: "id",
+      text: "player_assisted",
+      fill: "gold",
+      stroke: "red",
+      dy: 15
+    })
+      ]})
+      )
   }</div>
 </div>
 
