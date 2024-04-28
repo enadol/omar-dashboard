@@ -266,7 +266,7 @@ defs
       y: {label: "Amount"},
       color: {legend: true},
       marks: [
-        Plot.dot(action, {x: "lastAction", y: "id", r: "id", stroke: "red", fill: "lastAction"}) ,
+        Plot.dot(action, {x: "lastAction", y: "id", r: "id", stroke: "red", fill: "lastAction"}),
         Plot.tip(action, Plot.pointerX({x: "lastAction", y: "id"}))
       ]})
       )
