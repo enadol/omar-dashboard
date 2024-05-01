@@ -32,10 +32,10 @@ loop.run_until_complete(main())
 df=pd.read_json('./harryshots.json')
 
 df_result_grouped=df.groupby(['result']).count().sort_values(by=['id'], ascending=False)['id']
-df_result_grouped.to_csv('./docs/result.csv', encoding='iso-8859-1')
+df_result_grouped.to_csv('./docs/result.csv', encoding='ascii')
 
 df_assisted_grouped=df.groupby(['player_assisted']).count().sort_values(by=['id'], ascending=False)['id']
-df_assisted_grouped.to_csv('./docs/assisted.csv', encoding='iso-8859-1')
+df_assisted_grouped.to_csv('./docs/assisted.csv')
 
 df_type_grouped=df.groupby(['shotType']).count().sort_values(by=['id'], ascending=False)['id']
 df_type_grouped.to_csv('./docs/type.csv', encoding='iso-8859-1')

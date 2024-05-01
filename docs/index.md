@@ -101,6 +101,8 @@ opacity: 0.00001;
 }
 
 
+
+
 @media (min-width: 640px) {
   .hero h1 {
     font-size: 90px;
@@ -332,7 +334,8 @@ defs
       text: "player_assisted",
       fill: "gold",
       stroke: "red",
-      dy: 15
+      dy: 15,
+      rotate:-45
     }),
       Plot.tip(assisted, Plot.pointerY({x: "player_assisted", y: "id"}))
       ]})
