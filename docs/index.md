@@ -264,7 +264,7 @@ defs
     resize((width) => Plot.plot({title: "Harry Kane last actions before shots 🐧",
       width,
       grid: true,
-      x: {label: "Last Action"},
+      x: {label: "Last Action", tickRotate: -30},
       y: {label: "Amount"},
       color: {legend: true},
       marks: [
@@ -310,12 +310,12 @@ defs
   }</div>
     <div class="card" id="assisted">${
     resize((width) => Plot.plot({title: "Harry Kane shot partners 🐧",
-          subtitle: "Players that assisted shots by Jamal Musiala",
+          subtitle: "Players that assisted shots by Harry Kane",
       width,
       marginLeft: 70,
       marginBottom: 10,
       grid: false,
-      x: {label: "Player Assisted: "},
+      x: {label: "Player Assisted: ", tickRotate: -30},
       y: {label: "Assists to Harry Kane"},
       color: {legend: false},
       marks: [
