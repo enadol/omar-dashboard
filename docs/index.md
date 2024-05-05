@@ -284,9 +284,9 @@ defs
       y: {label: "Shots"},
       color: {legend: true},
       marks: [
-        Plot.ruleX(minutes, {x: "minute", y: "id", curve: "monotone-x", stroke: "violet"}),
+        Plot.ruleX(minutes, {x: "minute", y: "id", curve: "monotone-x", stroke: "violet", strokeWidth: 3}),
         Plot.tip(minutes, Plot.pointerX({x: "minute", y: "id"})),
-        Plot.dot(minutes, {x: "minute", y: "id", fill: "grey", r: 2}),
+        Plot.dot(minutes, {x: "minute", y: "id", fill: "grey", r: 3}),
         Plot.axisY({interval: 1})
       ]
     }))
