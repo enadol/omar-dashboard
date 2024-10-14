@@ -1,6 +1,6 @@
 ---
 theme: "dashboard"
-title: Harry Kane
+title: Omar Marmoush
 toc: false
 sidebar: false
 pager: false
@@ -152,7 +152,7 @@ const goals = data.filter((d) => d.result == "Goal");
 //display(await data)
 ```
 
-# HARRY KANE ALL SHOTS SEASON 2024/2025
+# OMAR MARMOUSH ALL SHOTS SEASON 2024/2025
 <div id="container" class="grid grid-cols-3">
   <div id="tool-data" class="card grid-colspan-2 custom-theme" style="background-color: rgb(33 146 242 / 90%);"><h3>SHOT DATA</h3><h2>Hover the mouse on the circles to show the data for each shot</h2></div>
 <div id="chart_card" class="card">
@@ -162,17 +162,17 @@ const HEIGHT_PITCH = 300;
 const HEIGHT_FOOTER = 20;
 var h = 300;
 var teams = {
-  'Bayern Munich': { color: 'crimson', side: 'home'},
+  'Eintracht Frankfurt': { color: 'crimson', side: 'home'},
   Opponent: { color: 'gold', side: 'away' }
   };
-const data_harry =(async () =>{ fetch('./_file/harryshots.json')
+const data_omar =(async () =>{ fetch('./_file/omarshots.json')
  .then(response => response.json())
- .then(data_harry => {
- console.log(data_harry);
+ .then(data_omar => {
+ console.log(data_omar);
 // aquí puedes trabajar con los datos JSON
  const layer = chartCard.select("#above")
     .selectAll(`circle`)
-    .data(data_harry)
+    .data(data_omar)
     .enter()
     .append("circle")
     .attr("cx", (d) => {
@@ -183,7 +183,7 @@ const data_harry =(async () =>{ fetch('./_file/harryshots.json')
       }
     })
     .attr("cy", (d) => 68 - parseFloat(d.Y) * 68)
-    .attr("stroke", (d) => teams["Bayern Munich"].color)
+    .attr("stroke", (d) => teams["Eintracht Frankfurt"].color)
     .attr("stroke-width", 0.2)
     .attr("fill", (d) =>
       d.result === "Goal" ? teams["Opponent"].color : "gold"
@@ -261,7 +261,7 @@ defs
 
 <div class="grid grid-cols-3">
   <div class="card" id="actions">${
-    resize((width) => Plot.plot({title: "Harry Kane last actions before shots 🐧",
+    resize((width) => Plot.plot({title: "Omar Marmoush last actions before shots 🐧",
       width,
       grid: true,
       x: {label: "Last Action", tickRotate: -30},
@@ -278,7 +278,7 @@ defs
       x: {domain: [0,3], interval: 1},
       y: {domain: [1,91], interval: 1},
       title: "Minute shot intensity 🐧",
-      subtitle: "Number of shots by Harry Kane per match minute (season)",
+      subtitle: "Number of shots by Omar Marmoush per match minute (season)",
       width,
       x: {label: "Minute"},
       y: {label: "Shots"},
@@ -296,7 +296,7 @@ defs
 <div class="grid grid-cols-3">
   <div class="card grid-colspan-2" style="grid-auto-rows: 204px;">${
     resize((width) => Plot.plot({
-      title: "Harry Kane shots outcome 🐧",
+      title: "Omar Marmoush shots outcome 🐧",
       width,
       marginBottom: 50,
       x: {label: ""},
@@ -309,14 +309,14 @@ defs
     }))
   }</div>
     <div class="card" id="assisted">${
-    resize((width) => Plot.plot({title: "Harry Kane shot partners 🐧",
-          subtitle: "Players that assisted shots by Harry Kane",
+    resize((width) => Plot.plot({title: "Omar Marmoush shot partners 🐧",
+          subtitle: "Players that assisted shots by Omar Marmoush",
       width,
       marginLeft: 70,
       marginBottom: 10,
       grid: false,
       x: {label: "Player Assisted: ", tickRotate: -30},
-      y: {label: "Assists to Harry Kane"},
+      y: {label: "Assists to Omar Marmoush"},
       color: {legend: false},
       marks: [
       Plot.dot(assisted, { x: "player_assisted", y: "id", r: "id", fill: "gold", stroke: "red" }),
