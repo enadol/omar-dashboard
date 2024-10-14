@@ -152,7 +152,7 @@ const goals = data.filter((d) => d.result == "Goal");
 //display(await data)
 ```
 
-# HARRY KANE ALL SHOTS SEASON 2023/2024
+# HARRY KANE ALL SHOTS SEASON 2024/2025
 <div id="container" class="grid grid-cols-3">
   <div id="tool-data" class="card grid-colspan-2 custom-theme" style="background-color: rgb(33 146 242 / 90%);"><h3>SHOT DATA</h3><h2>Hover the mouse on the circles to show the data for each shot</h2></div>
 <div id="chart_card" class="card">

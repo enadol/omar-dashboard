@@ -1,20 +1,22 @@
+"""import packages"""
+import sys
 import asyncio
 import json
-import nest_asyncio
 import codecs
+import nest_asyncio
 import pandas as pd
-import sys
 import aiohttp
 
 from understat import Understat
 
 
 async def main():
+    """pull player data from understat"""
     async with aiohttp.ClientSession() as session:
         understat = Understat(session)
         #player = await understat.get_player_grouped_stats(8418)
         #shots = await understat.get_player_shots(8418, {'season': "2022", 'player_assisted': 'Alphonso Davies'})
-        shots = await understat.get_player_shots(647, {'season': "2023"})
+        shots = await understat.get_player_shots(647, {'season': "2024"})
         #print(json.dumps(player))
         harry_string=json.dumps(shots, indent=4, ensure_ascii=False)
         ##print(shots)
